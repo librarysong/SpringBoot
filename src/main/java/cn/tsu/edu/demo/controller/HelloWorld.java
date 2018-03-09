@@ -1,8 +1,10 @@
 package cn.tsu.edu.demo.controller;
 
-import javax.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.tsu.edu.demo.exception.BusinessException;
 /**
  * 
  * @author song
@@ -10,10 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloWorld {
+	
+	
+	   @Value("${swf.msg}")
+       private  String msg;
+	   
+	   @Value("${swf.message}")
+	   private  String message;
+	
 	  @RequestMapping(value=("hello"))
-      public String say(@PathParam("id") Integer id)
+      public String say()
       {
-    	  int number=id;
-    	  return "接受的参数值为:"+number;
+		  //int no=1/0;
+		  throw new BusinessException("100", "用户名密码错误");
+    	  //return this.message;
       }
 }
